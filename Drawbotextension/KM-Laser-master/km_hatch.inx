@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+  <_name> Remplissage : Hachures </_name>
+  <id>command.evilmadscientist.axidraw_hatch.km</id>
+  <dependency type="extension">org.inkscape.output.svg.inkscape</dependency>
+
+<param name="tab" type="notebook">
+  <page name="splash" _gui-text="Hachures">
+  <_param name="Header" type="description" xml:space="preserve">
+Cette extension remplit chaque forme close avec des hachures vectorielles.
+Seuls les objets sélectionnés seront concernés.
+Pour mieux appréhender le résultat il est conseillé de vider le fond de la forme et de lui mettre seulement une couleur de contour. 
+Cela se fait sous le menu Objet > Fond et Contour.
+
+
+Les formes hachurées seront groupées avec leur hachûres. Pour les séparer utilisez clic droit > dégrouper
+  </_param>
+  <param name="hatchSpacing" type="float" min="0.1" max="1000" _gui-text="   Ecartement des rayures (px)">3.0</param>
+  <param name="hatchAngle" type="float" min="-360" max="360" _gui-text="   angle (degres)">45</param>
+  <param name="crossHatch" type="boolean" _gui-text="  doubler les rayures ?">false</param>
+
+  <param name="reducePenLifts" type="boolean" _gui-text="   Connecter les extrémités proches ">true</param>
+  <param name="hatchScope" type="float" min="1.1" max="5.0" _gui-text="   Portée des connexions (defaut: 3)">3.0</param>
+  <param name="holdBackHatchFromEdges" type="boolean" _gui-text="   retrait des hachure par rapport au contour ">true</param>
+  <param name="holdBackSteps" type="float" min="0.1" max="10.0" _gui-text="   distance de retrait (px) (default: 1)">1.0</param>
+  <param name="tolerance" type="float" min="0.1" max="100" _gui-text="   Tolerance (default: 3.0)">3.0</param>
+
+  <param name="footer" type="description" xml:space="preserve">
+            (v2.3.3, March 27, 2020)</param>
+
+  </page>
+  <page name="info" _gui-text="Plus d'info...">
+  <_param name="aboutpage" type="description" xml:space="preserve">
+L'ecartement des rayures (en pixels px) permets de régler la distance entre les rayures.
+ 
+L'Angle des hachures se renseigne en ° entre 0° (horizontal) et 90° (vertical).
+
+L'option doubler les rayures applique un effet mirroir sur l'angle des rayures en ajoutant une rangée
+de lignes perpendiculaires à la première. 
+
+L'option connecter les extrémités proches permets de créer un trait continu reliant les extrémités des hachures par une ligne courbe.
+Cela peut ameliorer le rendu du remplissage
+
+
+Pour cela vous pouvez décidez jusqu'à quelle distance les hachures seront reliées (en largeur de rayures).
+Cette option reliera toute les hachure proches jusqu'à une distance de X* la largeur d'une rayure.
+Nous conseillons des valeurs entre 2 et 4 car les valeurs plus hautes risquent d'entrainer des liaisons non désirées.
+
+
+L'option retrait des hachures par rapport au contour vise à éviter que le remplissage ne déborde du contour en arrếtant le remplissage avant le contour.
+Ce paramètre doit être + ou - lié au diamètre de votre crayon. Si celui-ci est assez large, il risque de déborder le contour.
+
+Les hachures crées héritent de la couleur et des contours de la forme initiale.
+
+Le paramètre de tolérance permets de régler précisément comment les hachures remplissent une forme. 
+Si il tente un remplissage des petites parties ou non.
+</_param>
+
+  </page>
+  </param>
+  <effect>
+    <object-type>all</object-type>
+    <effects-menu>
+      <submenu name="KM-LASER">
+      </submenu>
+    </effects-menu>
+  </effect>
+  <script>
+    <command location="inx" interpreter="python">km_hatch.py</command>
+  </script>
+</inkscape-extension>
